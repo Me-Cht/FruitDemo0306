@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import java.math.BigDecimal;
-@Table(name = "fruits")
+@Table(name = "fruit")
 @Entity
 public class Fruit {
 
@@ -22,7 +22,7 @@ public class Fruit {
 
     private BigDecimal price;
 
-    private Integer category;
+    private String category;
 
     public Long getId() {
         return id;
@@ -56,11 +56,11 @@ public class Fruit {
         this.price = price;
     }
 
-    public Integer getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(Integer category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 }

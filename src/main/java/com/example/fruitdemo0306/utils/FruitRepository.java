@@ -15,7 +15,7 @@ public interface FruitRepository extends JpaRepository <Fruit,Long> {
 
     @Transactional
     @Modifying  //指定该方法为执行修改操作
-    @Query("UPDATE Fruit f SET f.price = :newPrice WHERE f.id = :id")
+    @Query("UPDATE Fruit f SET f.price = :price WHERE f.id = :id")
         //@Query注解的作用是指定该方法执行SQL语句，在此为更新水果价格。
-    int updatePriceById(@Param("id") Long id, @Param("newPrice") BigDecimal newPrice);
+    int updatePriceById(@Param("id") Long id, @Param("price") BigDecimal price);
 }

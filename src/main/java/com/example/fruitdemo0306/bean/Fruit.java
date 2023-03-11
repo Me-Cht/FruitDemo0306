@@ -20,7 +20,7 @@ public class Fruit {
 
     private String description;
 
-    private BigDecimal price;
+    private Double price;
 
     private String category;
 
@@ -48,11 +48,11 @@ public class Fruit {
         this.description = description;
     }
 
-    public BigDecimal getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

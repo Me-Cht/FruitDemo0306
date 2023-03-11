@@ -103,7 +103,7 @@ public class FruitController {
 //                minPrice!=null ? minPrice: Double.MAX_VALUE,
 //                maxPrice != null ? maxPrice: Double.MAX_VALUE
 
-    @GetMapping("/searchname")
+    @GetMapping("/search")
     public ResponseEntity<List<Fruit>> getFName(@RequestBody(required = false) Map<String,Object> body){
         String name = Optional.ofNullable(body.get("name")).map(Object::toString).orElse("");
         String category = Optional.ofNullable(body.get("category")).map(Object::toString).orElse("");

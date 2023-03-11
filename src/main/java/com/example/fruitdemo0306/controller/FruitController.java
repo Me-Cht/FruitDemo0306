@@ -1,18 +1,15 @@
 package com.example.fruitdemo0306.controller;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Collections;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.fruitdemo0306.Service.FruitService;
 import com.example.fruitdemo0306.bean.Fruit;
-import com.example.fruitdemo0306.bean.FruitMapper;
 import com.example.fruitdemo0306.utils.FruitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -24,13 +21,11 @@ public class FruitController {
 
     @Autowired
     private FruitRepository fruitRepository;
-    @Autowired
-    private FruitMapper fruitMapper;
+
 
     @Autowired
     FruitService fruitService;
 
-    private static final Logger LOGGER = Logger.getLogger(FruitController.class.getName());
 
     @GetMapping("/findAll")
     public List<Fruit> getAllFruits() {
@@ -74,24 +69,7 @@ public class FruitController {
         return fruitRepository.save(fruit);
     }
 
-    @GetMapping("/search")
-    public ResponseEntity<List<Fruit>> getFruits(
-            @RequestParam(required = false) String name,
-            @RequestParam(required = false) String category,
-            @RequestParam(required = false) Double minPrice,
-            @RequestParam(required = false) Double maxPrice
-    ) {
-        LOGGER.log(Level.INFO, "Received search request with name={0}, category={1}, minPrice={2}, maxPrice={3}",
-                new Object[]{name, category, minPrice, maxPrice});
-        List<Fruit> fruits = fruitRepository.findByPriceBetweenAndNameContainingAndCategoryContaining(
-                minPrice != null ? minPrice : 0,
-                maxPrice != null ? maxPrice : Double.MAX_VALUE,
-                name != null ? name : "",
-                category != null ? category : ""
-        );
 
-        return ResponseEntity.ok(fruits);
-    }
 
     //        @RequestParam(required = false) String name,
 //        @RequestParam(required = false) String category,
@@ -103,12 +81,16 @@ public class FruitController {
 //                minPrice!=null ? minPrice: Double.MAX_VALUE,
 //                maxPrice != null ? maxPrice: Double.MAX_VALUE
 
-    @GetMapping("/search")
+    @PostMapping("/search")
     public ResponseEntity<List<Fruit>> getFName(@RequestBody(required = false) Map<String,Object> body){
-        String name = Optional.ofNullable(body.get("name")).map(Object::toString).orElse("");
-        String category = Optional.ofNullable(body.get("category")).map(Object::toString).orElse("");
-        Double minPrice = Optional.ofNullable(body.get("minPrice")).map(Object::toString).map(Double::parseDouble).orElse(0.0);
-        Double maxPrice = Optional.ofNullable(body.get("maxPrice")).map(Object::toString).map(Double::parseDouble).orElse(99999.0);
+        if (body == null) {
+            // 如果请求体为空，则直接返回空列表
+            return ResponseEntity.ok(Collections.emptyList());
+        }
+        String name = (String) body.getOrDefault("name", "");
+        String category = (String) body.getOrDefault("category", "");
+        Double minPrice = body.get("minPrice") != null ? Double.parseDouble(body.get("minPrice").toString()) : 0.0;
+        Double maxPrice = body.get("maxPrice") != null ? Double.parseDouble(body.get("maxPrice").toString()) : Double.MAX_VALUE;
         List<Fruit> fruits = fruitRepository.findByNameContaining(name, category, minPrice, maxPrice);
     return ResponseEntity.ok(fruits);
     }

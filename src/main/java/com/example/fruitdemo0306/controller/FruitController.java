@@ -23,8 +23,7 @@ public class FruitController {
     private FruitRepository fruitRepository;
 
 
-    @Autowired
-    FruitService fruitService;
+
 
 
     @GetMapping("/findAll")

@@ -10,15 +10,11 @@ package com.example.fruitdemo0306.bean;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
-/**
- * @author: Hotan
- * @Project: BigData-MovieRecommender
- * @Pcakage: com.example.fruitdemo0306.bean.UserLogin
- * @Date: 2023年03月12日 21:18
- * @Description:
- */
+
 @Entity
+@Table(name="user_login")
 public class UserLogin {
     @Id
     private int id;

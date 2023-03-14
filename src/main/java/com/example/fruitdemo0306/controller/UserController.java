@@ -8,15 +8,16 @@ package com.example.fruitdemo0306.controller;
  * @Version 1.0
  */
 
+import com.example.fruitdemo0306.Service.UserService;
 import com.example.fruitdemo0306.bean.User;
+import com.example.fruitdemo0306.bean.UserLogin;
+import com.example.fruitdemo0306.utils.Result;
 import com.example.fruitdemo0306.utils.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -27,8 +28,12 @@ import java.util.List;
  * @Description:
  */
 @RestController
+
+@CrossOrigin
 @RequestMapping("api/user")
 public class UserController {
+    @Resource
+    private UserService userService;
     @Autowired
     private UserRepository userRepository;
 
@@ -36,6 +41,20 @@ public class UserController {
     public List<User> getAllData(){
         return userRepository.findAll();
     }
+    @RequestMapping("/login")
+    public Result<UserLogin> loginController(@RequestBody User user) {
+        String name = user.getName();
+        String password = user.getPassword();
+        UserLogin userLogin = userService.loginService(name, password);
+        if (userLogin != null) {
+            return Result.success(userLogin, "登录成功！");
+        } else {
+            return Result.error("10000", "密码错误！");
+        }
+    }
+
+
+
 
 
 

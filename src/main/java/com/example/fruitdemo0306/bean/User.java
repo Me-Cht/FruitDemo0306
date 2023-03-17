@@ -10,6 +10,7 @@ package com.example.fruitdemo0306.bean;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * @author: Hotan
@@ -19,6 +20,7 @@ import javax.persistence.Id;
  * @Description:
  */
 @Entity
+@Table(name = "user")
 
 public class User {
     @Id

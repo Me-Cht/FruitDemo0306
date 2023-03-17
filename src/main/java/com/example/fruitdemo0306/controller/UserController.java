@@ -42,7 +42,7 @@ public class UserController {
         return userRepository.findAll();
     }
     @RequestMapping("/login")
-    public Result<UserLogin> loginController(@RequestBody User user) {
+    public Result<UserLogin> loginController(@RequestBody UserLogin user) {
         String name = user.getName();
         String password = user.getPassword();
         UserLogin userLogin = userService.loginService(name, password);

@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.10-SNAPSHOT</version>
+        <version>2.6.2</version> <!-- 修改版本号为您需要的版本 -->
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
@@ -25,7 +25,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
+            <version>2.6.2</version> <!-- 修改版本号为您需要的版本 -->
         </dependency>
         <!-- Spring Boot Web依赖 -->
 
